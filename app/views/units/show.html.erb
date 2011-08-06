@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @unit.user_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @unit.status %>
+</p>
+
+<p>
+  <b>Icon:</b>
+  <%= @unit.icon %>
+</p>
+
+<p>
+  <b>Data:</b>
+  <%= @unit.data %>
+</p>
+
+
+<%= link_to 'Edit', edit_unit_path(@unit) %> |
+<%= link_to 'Back', units_path %>

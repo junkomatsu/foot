@@ -1,4 +1,14 @@
 Foot::Application.routes.draw do
+  resources :units
+
+  resources :lobbies
+
+  resources :battles
+
+  resources :users
+
+  resources :items
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Status:</b>
+  <%= @lobby.status %>
+</p>
+
+<p>
+  <b>Data:</b>
+  <%= @lobby.data %>
+</p>
+
+
+<%= link_to 'Edit', edit_lobby_path(@lobby) %> |
+<%= link_to 'Back', lobbies_path %>

@@ -1,0 +1,33 @@
+<%= form_for(@battle) do |f| %>
+  <% if @battle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@battle.errors.count, "error") %> prohibited this battle from being saved:</h2>
+
+      <ul>
+      <% @battle.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id1 %><br />
+    <%= f.text_field :user_id1 %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id2 %><br />
+    <%= f.text_field :user_id2 %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :data %><br />
+    <%= f.text_field :data %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
