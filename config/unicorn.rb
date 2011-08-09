@@ -9,7 +9,7 @@ $timeout = 75 # タイムアウト秒数。タイムアウトしたslaveは再�
 
 # String => UNIX domain socket / FixNum => TCP socket
 #$listen = "/home/bps/tmp/unicorn.sock"
-$listen = 5000
+$listen = 8081
 
 # ---- end of config ----
 
