@@ -7,7 +7,7 @@ gem 'rails', '3.0.9'
 
 # gem 'sqlite3', '1.2.5'
 
-group production do
+group :production do
 gem 'mysql2'
 end
 
