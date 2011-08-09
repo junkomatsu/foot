@@ -8,7 +8,7 @@ gem 'rails', '3.0.9'
 # gem 'sqlite3', '1.2.5'
 
 group :production do
-gem 'mysql2'
+gem 'mysql2', '< 0.3'
 end
 
 # Use unicorn as the web server
