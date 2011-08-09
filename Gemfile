@@ -9,6 +9,7 @@ gem 'rails', '3.0.9'
 
 group :production do
 gem 'mysql2'
+gem 'activerecord-mysql2-adapter'
 end
 
 # Use unicorn as the web server
