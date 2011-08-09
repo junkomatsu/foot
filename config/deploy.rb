@@ -11,16 +11,29 @@ role :app, "sakura"
 role :web, "sakura"
 role :db, "sakura", :primary => true
 
+set :rails_env, :production
+set :unicorn_binary, "/usr/bin/unicorn"
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
+
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && BUNDLE_GEMFILE=#{current_path}/Gemfile bundle exec unicorn_rails -c #{current_path}/config/unicorn.rb -E production -D"
+    run "cd #{current_path} && #{try_sudo} #{unicorn_binary} -p 8081 -E #{rails_env} -D"
   end
  
   task :stop, :roles => :app, :except => { :no_release => true } do
-    run "kill -KILL -s QUIT `cat #{shared_path}/pids/unicorn.pid`"
+    run "#{try_sudo} kill `cat #{unicorn_pid}`"
   end
- 
+
+  task :graceful_stop, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
+  end
+
+  task :reload, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} kill -s USR2 `cat #{unicorn_pid}`"
+  end
+
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "kill -KILL -s USR2 `cat #{shared_path}/pids/unicorn.pid`"
+    stop
+    start
   end
 end
