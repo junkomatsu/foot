@@ -19,4 +19,4 @@ worker_processes (rails_env == 'production' ? $prod_processes : $dev_processes)
 preload_app true
 timeout $timeout
 listen $listen, :backlog => 2048
-pid "${RAILS_APP_ROOT}/log/unicorn.pid"
+pid "tmp/pids/unicorn.pid"
