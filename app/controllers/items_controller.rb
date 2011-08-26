@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.json  { render :json => @items }
       format.xml  { render :xml => @items }
     end
   end
@@ -17,6 +18,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.json  { render :json => @item }
       format.xml  { render :xml => @item }
     end
   end
@@ -28,6 +30,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
+      format.json  { render :json => @item }
       format.xml  { render :xml => @item }
     end
   end
@@ -45,9 +48,11 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
+        format.json  { render :json => @item, :status => :created, :location => @item }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
       else
         format.html { render :action => "new" }
+        format.json  { render :json => @item.errors, :status => :unprocessable_entity }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
       end
     end
@@ -61,9 +66,11 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.update_attributes(params[:item])
         format.html { redirect_to(@item, :notice => 'Item was successfully updated.') }
+        format.json  { head :ok }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
+        format.json  { render :json => @item.errors, :status => :unprocessable_entity }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
       end
     end
@@ -77,6 +84,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(items_url) }
+      format.json  { head :ok }
       format.xml  { head :ok }
     end
   end
