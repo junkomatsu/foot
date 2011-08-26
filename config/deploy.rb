@@ -7,9 +7,9 @@ ssh_options[:forward_agent] = true
 set :user, "deploy"
 set :use_sudo, false
 
-role :app, "sakura"
-role :web, "sakura"
-role :db, "sakura", :primary => true
+role :app, "sakura2"
+role :web, "sakura2"
+role :db, "sakura2", :primary => true
 
 set :rails_env, :production
 set :unicorn_binary, "/usr/bin/unicorn"
@@ -36,5 +36,14 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     stop
     start
+  end
+
+  desc "Run bundle install"
+  task :bundle do
+    run "cd #{release_path} && bundle install #{shared_path}/lib"
+  end
+
+  after "deploy:update", :roles => :app do
+    deploy.bundle
   end
 end
