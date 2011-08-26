@@ -38,6 +38,10 @@ namespace :deploy do
     start
   end
 
+  task :seed do
+    run "cd #{current_path} && rake RAILS_ENV=#{rails_env} db:seed"
+  end
+
   desc "Run bundle install"
   task :bundle do
     run "cd #{release_path} && bundle install #{shared_path}/lib"
