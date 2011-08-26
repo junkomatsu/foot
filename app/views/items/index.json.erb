@@ -1,0 +1,11 @@
+<%=
+@item.map{|e|
+  {
+     :id => e.id,
+     :type => e.type,
+     :name => e.name,
+     :created_at => e.created_at,
+     :updated_at => e.updated_at
+  }
+}.to_json
+%>
