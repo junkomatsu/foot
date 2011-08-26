@@ -12,7 +12,7 @@ role :web, "sakura2"
 role :db, "sakura2", :primary => true
 
 set :rails_env, :production
-set :unicorn_binary, "/usr/bin/unicorn"
+set :unicorn_binary, "/usr/local/bin/unicorn"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
