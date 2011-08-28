@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110828052651) do
+ActiveRecord::Schema.define(:version => 20110828101530) do
 
   create_table "battles", :force => true do |t|
     t.integer  "user_id1"
@@ -54,6 +54,9 @@ ActiveRecord::Schema.define(:version => 20110828052651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "id_str"
+    t.string   "icon_url"
+    t.string   "twitter_access_token"
+    t.string   "twitter_access_token_secret"
   end
 
 end
