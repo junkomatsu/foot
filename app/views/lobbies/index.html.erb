@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>User</th>
     <th>Status</th>
     <th>Data</th>
     <th></th>
@@ -11,6 +12,7 @@
 
 <% @lobbies.each do |lobby| %>
   <tr>
+    <td><%= lobby.user.id_str %></td>
     <td><%= lobby.status %></td>
     <td><%= lobby.data %></td>
     <td><%= link_to 'Show', lobby %></td>

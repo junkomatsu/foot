@@ -1,24 +1,20 @@
 class LobbiesController < ApplicationController
+  respond_to :html, :json, :xml
+
   # GET /lobbies
   # GET /lobbies.xml
   def index
     @lobbies = Lobby.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @lobbies }
-    end
+    respond_with @lobbies, {:except => [:id, :user_id]}
   end
 
   # GET /lobbies/1
   # GET /lobbies/1.xml
   def show
-    @lobby = Lobby.find(params[:id])
+    @lobby = Lobby.find_by_id_str(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @lobby }
-    end
+    respond_with @lobby, {:except => [:id, :user_id]}
   end
 
   # GET /lobbies/new
@@ -26,10 +22,7 @@ class LobbiesController < ApplicationController
   def new
     @lobby = Lobby.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @lobby }
-    end
+    respond_with @lobby
   end
 
   # GET /lobbies/1/edit

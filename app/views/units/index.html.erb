@@ -13,7 +13,7 @@
 
 <% @units.each do |unit| %>
   <tr>
-    <td><%= unit.user_id %></td>
+    <td><%= unit.user.id_str %></td>
     <td><%= unit.status %></td>
     <td><%= unit.icon %></td>
     <td><%= unit.data %></td>

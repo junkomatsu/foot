@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @users = User.where(conditions).order(order);
     logger.info('log test')
     logger.info(request.headers['Accept'])
-    respond_with @users
+    respond_with @users, {:except => [:id, :twitter_access_token, :twitter_access_token_secret]}
   end
 
   # GET /users/104205970003083264
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_id_str(params[:id])
 
-    respond_with @user
+    respond_with @user, {:except => [:id, :twitter_access_token, :twitter_access_token_secret]}
   end
 
   # GET /users/new
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
 
-    respond_with @user
+    respond_with @user, {:except => [:id, :twitter_access_token, :twitter_access_token_secret]}
   end
 
   # GET /users/1/edit

@@ -6,14 +6,14 @@ class UnitsController < ApplicationController
   # GET /units.xml
   def index
     conditions = {}
-#    conditions[:type] = params[:type] if params[:type]
+    conditions['users.id_str'] = params[:user_id] if params[:user_id]
     order = params[:order]
     count = params[:count] || 100
     offset = params[:offset] || 0
 
-    @units = Unit.where(conditions).order(order).limit(count).offset(offset)
+    @units = Unit.joins(:user).where(conditions).order(order).limit(count).offset(offset)
 
-    respond_with @units
+    respond_with @units, {:except => :user_id}
   end
 
   # GET /users/:user_id/units/1
@@ -22,7 +22,7 @@ class UnitsController < ApplicationController
   def show
     @unit = Unit.find(params[:id])
 
-    respond_with @unit
+    respond_with @unit, {:except => :user_id}
   end
 
   # GET /users/:user_id/units/new
@@ -31,7 +31,7 @@ class UnitsController < ApplicationController
   def new
     @unit = Unit.new
 
-    rendpond_with @unit
+    rendpond_with @unit, {:except => :user_id}
   end
 
   # GET /users/:user_id/units/1/edit

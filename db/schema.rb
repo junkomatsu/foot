@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110828101530) do
+ActiveRecord::Schema.define(:version => 20110828131624) do
 
   create_table "battles", :force => true do |t|
     t.integer  "user_id1"
@@ -29,12 +29,8 @@ ActiveRecord::Schema.define(:version => 20110828101530) do
     t.datetime "updated_at"
   end
 
-  create_table "lobbies", :force => true do |t|
-    t.integer  "status"
-    t.string   "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+# Could not dump table "lobbies" because of following StandardError
+#   Unknown type 'id' for column 'user_id'
 
   create_table "units", :force => true do |t|
     t.integer  "user_id"
