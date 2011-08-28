@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Id str</th>
     <th>Screen name</th>
     <th>Status</th>
     <th>Rank</th>
@@ -14,6 +15,7 @@
 
 <% @users.each do |user| %>
   <tr>
+    <td><%= user.id_str %></td>
     <td><%= user.screen_name %></td>
     <td><%= user.status %></td>
     <td><%= user.rank %></td>

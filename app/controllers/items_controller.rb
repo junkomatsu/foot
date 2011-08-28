@@ -1,38 +1,37 @@
 class ItemsController < ApplicationController
+  respond_to :html, :json, :xml
+
   # GET /items
+  # GET /items.json
   # GET /items.xml
   def index
-    @items = Item.all
+    conditions = {}
+    conditions[:type] = params[:type] if params[:type]
+    order = params[:order]
+    count = params[:count] || 100
+    offset = params[:offset] || 0
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json  { render :json => @items }
-      format.xml  { render :xml => @items }
-    end
+    @items = Item.where(conditions).order(order).limit(count).offset(offset)
+
+    respond_with @items
   end
 
   # GET /items/1
+  # GET /items/1.json
   # GET /items/1.xml
   def show
     @item = Item.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json  { render :text => @item.to_json }
-      format.xml  { render :xml => @item }
-    end
+    respond_with @item
   end
 
   # GET /items/new
+  # GET /items/new.json
   # GET /items/new.xml
   def new
     @item = Item.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json  { render :json => @item }
-      format.xml  { render :xml => @item }
-    end
+    respond_with @item
   end
 
   # GET /items/1/edit
@@ -41,6 +40,7 @@ class ItemsController < ApplicationController
   end
 
   # POST /items
+  # POST /items.json
   # POST /items.xml
   def create
     @item = Item.new(params[:item])
@@ -59,6 +59,7 @@ class ItemsController < ApplicationController
   end
 
   # PUT /items/1
+  # PUT /items/1.json
   # PUT /items/1.xml
   def update
     @item = Item.find(params[:id])
@@ -77,6 +78,7 @@ class ItemsController < ApplicationController
   end
 
   # DELETE /items/1
+  # DELETE /items/1.json
   # DELETE /items/1.xml
   def destroy
     @item = Item.find(params[:id])

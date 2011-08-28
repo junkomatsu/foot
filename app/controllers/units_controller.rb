@@ -1,82 +1,92 @@
 class UnitsController < ApplicationController
+  respond_to :html, :json, :xml
+
   # GET /units
+  # GET /units.json
   # GET /units.xml
   def index
-    @units = Unit.all
+    conditions = {}
+#    conditions[:type] = params[:type] if params[:type]
+    order = params[:order]
+    count = params[:count] || 100
+    offset = params[:offset] || 0
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @units }
-    end
+    @units = Unit.where(conditions).order(order).limit(count).offset(offset)
+
+    respond_with @units
   end
 
-  # GET /units/1
-  # GET /units/1.xml
+  # GET /users/:user_id/units/1
+  # GET /users/:user_id/units/1.json
+  # GET /users/:user_id/units/1.xml
   def show
     @unit = Unit.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @unit }
-    end
+    respond_with @unit
   end
 
-  # GET /units/new
-  # GET /units/new.xml
+  # GET /users/:user_id/units/new
+  # GET /users/:user_id/units/new.json
+  # GET /users/:user_id/units/new.xml
   def new
     @unit = Unit.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @unit }
-    end
+    rendpond_with @unit
   end
 
-  # GET /units/1/edit
+  # GET /users/:user_id/units/1/edit
   def edit
     @unit = Unit.find(params[:id])
   end
 
   # POST /units
+  # POST /units.json
   # POST /units.xml
   def create
     @unit = Unit.new(params[:unit])
 
     respond_to do |format|
       if @unit.save
-        format.html { redirect_to(@unit, :notice => 'Unit was successfully created.') }
+        format.html { redirect_to(user_unit_path(@unit), :notice => 'Unit was successfully created.') }
+        format.json  { render :json => @unit, :status => :created, :location => @unit }
         format.xml  { render :xml => @unit, :status => :created, :location => @unit }
       else
         format.html { render :action => "new" }
+        format.json  { render :json => @unit.errors, :status => :unprocessable_entity }
         format.xml  { render :xml => @unit.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /units/1
-  # PUT /units/1.xml
+  # PUT /users/:user_id/units/1
+  # PUT /users/:user_id/units/1.xml
+  # PUT /users/:user_id/units/1.xml
   def update
     @unit = Unit.find(params[:id])
 
     respond_to do |format|
       if @unit.update_attributes(params[:unit])
-        format.html { redirect_to(@unit, :notice => 'Unit was successfully updated.') }
+        format.html { redirect_to(user_unit_path(@unit), :notice => 'Unit was successfully updated.') }
+        format.json { head :ok }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
+        format.json { render :json => @unit.errors, :status => :unprocessable_entity }
         format.xml  { render :xml => @unit.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /units/1
-  # DELETE /units/1.xml
+  # DELETE /users/:user_id/units/1
+  # DELETE /users/:user_id/units/1.xml
+  # DELETE /users/:user_id/units/1.xml
   def destroy
     @unit = Unit.find(params[:id])
     @unit.destroy
 
     respond_to do |format|
-      format.html { redirect_to(units_url) }
+      format.html { redirect_to(user_units_url) }
+      format.json { head :ok }
       format.xml  { head :ok }
     end
   end

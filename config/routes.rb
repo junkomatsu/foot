@@ -1,11 +1,11 @@
 Foot::Application.routes.draw do
-  resources :units
-
   resources :lobbies
 
   resources :battles
 
-  resources :users
+  resources :users do
+    resources :units
+  end
 
   resources :items
 

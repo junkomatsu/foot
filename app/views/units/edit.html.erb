@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @unit %> |
-<%= link_to 'Back', units_path %>
+<%= link_to 'Show', user_unit_path(:user_id => @unit.user) %> |
+<%= link_to 'Back', user_units_path %>
