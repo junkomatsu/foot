@@ -27,7 +27,7 @@ class LobbiesController < ApplicationController
 
   # GET /lobbies/1/edit
   def edit
-    @lobby = Lobby.find(params[:id])
+    @lobby = Lobby.find_by_id_str(params[:id])
   end
 
   # POST /lobbies
@@ -49,7 +49,7 @@ class LobbiesController < ApplicationController
   # PUT /lobbies/1
   # PUT /lobbies/1.xml
   def update
-    @lobby = Lobby.find(params[:id])
+    @lobby = Lobby.find_by_id_str(params[:id])
 
     respond_to do |format|
       if @lobby.update_attributes(params[:lobby])
@@ -65,7 +65,7 @@ class LobbiesController < ApplicationController
   # DELETE /lobbies/1
   # DELETE /lobbies/1.xml
   def destroy
-    @lobby = Lobby.find(params[:id])
+    @lobby = Lobby.find_by_id_str(params[:id])
     @lobby.destroy
 
     respond_to do |format|
