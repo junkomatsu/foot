@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     conditions[:status] = params[:status] if params[:status]
     order = params[:order]
     @users = User.where(conditions).order(order);
-
+    logger.info request.headers['Accept']
     respond_with @users
   end
 
